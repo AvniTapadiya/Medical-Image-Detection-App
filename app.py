@@ -36,9 +36,10 @@ Important Notes:
 
 """
 model = genai.GenerativeModel(
-  model_name="gemini-1.5-pro",
+  "gemini-1.5-pro",
   generation_config=generation_config,
 )
+
  # set the page configuration 
 st.set_page_config(page_title="VitalImage Analytics", page_icon=":robot:")
 
@@ -76,13 +77,15 @@ if submit_button and uploaded_file is not None:
     try:
          
         # Prepare the prompt with image
-        prompt_ports = [
-            {"mime_type": uploaded_file.type, "data": uploaded_file.getvalue()},
-            system_prompt
-        ]
-
-        # Generate response
-        response = model.generate_content(prompt_ports)
+        response = model.generate_content(
+    [
+        system_prompt,
+        {
+            "mime_type": uploaded_file.type,
+            "data": uploaded_file.getvalue()
+        }
+    ]
+)
 
         # Display the response
         st.subheader("Here is the analysis based on your Image:")
