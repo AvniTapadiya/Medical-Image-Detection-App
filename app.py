@@ -36,7 +36,7 @@ Important Notes:
 
 """
 model = genai.GenerativeModel(
-  "gemini-1.5-pro",
+  "gemini-2.5-pro",
   generation_config=generation_config,
 )
 
